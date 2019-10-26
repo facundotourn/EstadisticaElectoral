@@ -7,12 +7,14 @@ except:
 
 anios = ["1993", "1995", "1997", "1999", "2001", "2003", "2005", "2007", "2009", "2011", "2015", "2017", "2019"]
 instancias = ["Paso", "Primera vuelta", "Segunda vuelta"]
-tipos = ["Diputados", "Presidente", "Senadores"]
+tipos = ["Diputados", "Presidente" ]#, "Senadores"]
 
 for anio in anios:
     for instancia in instancias:
         for tipo in tipos:
+            print(".\\" + instancia + "\\" + tipo + "\\" + anio + ".xls")
             try:
                 g = pd.read_excel(".\\" + instancia * "\\" + tipo + "\\" + anio + ".xls")
             except:
                 print("No hubo " + instancia + " de " + tipo + " en el año " + anio)
+            print()
