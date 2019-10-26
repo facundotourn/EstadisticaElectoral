@@ -5,8 +5,21 @@ anios = ["1993", "1995", "1997", "1999", "2001", "2003", "2005", "2007", "2009",
 instancias = ["PASO", "Primera vuelta", "Segunda vuelta"]
 tipos = ["Diputados", "Presidente" ]#, "Senadores"]
 
+def getNuevasColumnas(size):
+    i = 0
+    arr = []
+    while i < size:
+        arr.append(str(i))
+    
+    return arr
+
 def procesarHoja (path,hoja):
-    return pd.read_excel(path,hoja);
+    data_hoja = pd.read_excel(path,hoja);
+    data_hoja.columns 
+    retorno = {}
+    data_hoja.columns = getNuevasColumnas(data_hoja.columns.size)
+    #retorno['columna'] = data_hoja['col1']
+    return data_hoja['0']
 
 
 def procesarArchivo(anio, instancia, tipo, path):
@@ -19,7 +32,7 @@ def procesarArchivo(anio, instancia, tipo, path):
         
     for hoja in hojas:
         data[hoja] = procesarHoja(path,hoja)
-    return;
+    return data;
 
 for anio in anios:
     for instancia in instancias:
@@ -27,7 +40,7 @@ for anio in anios:
             print(".\\excels\\" + instancia + "\\" + tipo + "\\" + anio + ".xlsx")
             try:
                 path = ".\\excels\\" + instancia + "\\" + tipo + "\\" + anio + ".xlsx"
-                procesarArchivo(anio,instancia,tipo,path)
+                data = procesarArchivo(anio,instancia,tipo,path)
                 
                 print("Detectado")
             except FileNotFoundError:
