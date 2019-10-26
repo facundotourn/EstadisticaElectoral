@@ -10,7 +10,8 @@ def getNuevasColumnas(size):
     arr = []
     while i < size:
         arr.append(str(i))
-    
+        i += 1
+        
     return arr
 
 def procesarHoja (path,hoja):
@@ -34,17 +35,23 @@ def procesarArchivo(anio, instancia, tipo, path):
         data[hoja] = procesarHoja(path,hoja)
     return data;
 
+diccionarioAnios = {}
+
 for anio in anios:
-    for instancia in instancias:
-        for tipo in tipos:
+    for tipo in tipos:
+        for instancia in instancias:
             print(".\\excels\\" + instancia + "\\" + tipo + "\\" + anio + ".xlsx")
             try:
                 path = ".\\excels\\" + instancia + "\\" + tipo + "\\" + anio + ".xlsx"
-                data = procesarArchivo(anio,instancia,tipo,path)
+                diccionarioInstancia[instancia] = procesarArchivo(anio,instancia,tipo,path)
                 
                 print("Detectado")
+
+                print(data)
             except FileNotFoundError:
                 print("No hubo " + instancia + " de " + tipo + " en el año " + anio)
             print()
-            
+
+        diccionarioTipos[tipo] = diccionarioInstancia
+    diccionarioAnios[anio] = diccionarioTipos
             
